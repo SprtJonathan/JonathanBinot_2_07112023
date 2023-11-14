@@ -74,8 +74,22 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public double GetAverageValue()
         {
-            // TODO implement the method
-            return 0.0;
+            // Declare the quantity and price variables
+            int quantity = 0;
+            double priceTotal = 0.0;
+
+            // For each product in the cart, we increment the quantity and the total price
+            foreach (CartLine line in Lines)
+            {
+                // Get the quantity of products
+                quantity += line.Quantity;
+
+                // Get the price of product multiplied by the quantity
+                priceTotal += line.Product.Price * line.Quantity;
+            }
+
+            // Return the average price per product in the cart
+            return priceTotal / quantity;
         }
 
         /// <summary>
@@ -83,8 +97,8 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public Product FindProductInCartLines(int productId)
         {
-            // TODO implement the method
-            return null;
+            // Find product matching with given Id
+            return GetCartLineList().Find(productToFind => productToFind.Product.Id == productId).Product;
         }
 
         /// <summary>
