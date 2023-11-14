@@ -16,6 +16,7 @@ namespace P2FixAnAppDotNetCode.Controllers
             _productService = productService;
         }
 
+
         public ViewResult Index()
         {
             return View(_cart as Cart);

@@ -81,7 +81,7 @@ namespace P2FixAnAppDotNetCode.Models
             // For each product in the cart, we increment the quantity and the total price
             foreach (CartLine line in Lines)
             {
-                // Get the quantity of products
+                // Get the total quantity of all the products
                 quantity += line.Quantity;
 
                 // Get the price of product multiplied by the quantity
