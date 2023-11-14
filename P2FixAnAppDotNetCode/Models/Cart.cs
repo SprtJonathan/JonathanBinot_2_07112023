@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 
 namespace P2FixAnAppDotNetCode.Models
 {
@@ -8,6 +10,11 @@ namespace P2FixAnAppDotNetCode.Models
     /// </summary>
     public class Cart : ICart
     {
+        /// <summary>
+        /// List used to contain all the products added to the Cart
+        /// </summary>
+        private List<CartLine> cartLine = new List<CartLine>();
+
         /// <summary>
         /// Read-only property for dispaly only
         /// </summary>
@@ -19,7 +26,7 @@ namespace P2FixAnAppDotNetCode.Models
         /// <returns></returns>
         private List<CartLine> GetCartLineList()
         {
-            return new List<CartLine>();
+            return cartLine;
         }
 
         /// <summary>
@@ -27,7 +34,24 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>//
         public void AddItem(Product product, int quantity)
         {
-            // TODO implement the method
+            // Check if an article is already in the cart
+            CartLine existingArticle = GetCartLineList().Find(productToFind => productToFind.Product.Id == product.Id);
+
+            // If the article isn't already in the cart, we simply add it
+            if (existingArticle == null)
+            {
+                GetCartLineList().Add(new CartLine()
+                {
+                    OrderLineId = Lines.Count(),
+                    Product = product,
+                    Quantity = quantity,
+                });
+            }
+            // Else if the article is already in the cart, we simply increase its quantity
+            else
+            {
+                existingArticle.Quantity += quantity;
+            }
         }
 
         /// <summary>
@@ -41,8 +65,8 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public double GetTotalValue()
         {
-            // TODO implement the method
-            return 0.0;
+            // Calculate total cart value by making the sum of all products multiplied by their quantity
+            return Lines.Sum(productValue => productValue.Product.Price * productValue.Quantity);
         }
 
         /// <summary>
