@@ -18,13 +18,10 @@ namespace P2FixAnAppDotNetCode.Models.Services
         }
 
         /// <summary>
-        /// Get all product from the inventory
+        /// Get all product from the inventory as a List<T>
         /// </summary>
         public List<Product> GetAllProducts()
         {
-            // TODO change the return type from array to List<T> and propagate the change
-            // thoughout the application
-            // Done
             return _productRepository.GetAllProducts();
         }
 
@@ -35,7 +32,6 @@ namespace P2FixAnAppDotNetCode.Models.Services
         {
             List<Product> productsList = _productRepository.GetAllProducts();
             return productsList.Find(x => x.Id == id);
-
         }
 
         /// <summary>
