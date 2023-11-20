@@ -47,6 +47,8 @@ namespace P2FixAnAppDotNetCode
                     new CultureInfo("en-GB"),
                     new CultureInfo("en-US"),
                     new CultureInfo("en"),
+                    new CultureInfo("es-ES"), // Added Spanish language
+                    new CultureInfo("es"), // Added Spanish language
                     new CultureInfo("fr-FR"),
                     new CultureInfo("fr"),
                 };

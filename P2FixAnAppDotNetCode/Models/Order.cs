@@ -20,7 +20,8 @@ namespace P2FixAnAppDotNetCode.Models
 
         [Required(ErrorMessage = "ErrorMissingCity")]
         public string City { get; set; }
-
+        // Added Zipcode required tag
+        [Required(ErrorMessage = "ErrorMissingZip")]
         public string Zip { get; set; }
 
         [Required(ErrorMessage = "ErrorMissingCountry")]
